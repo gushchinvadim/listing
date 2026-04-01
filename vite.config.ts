@@ -11,9 +11,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-
-const repoName = 'https://github.com/gushchinvadim/listing' 
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -22,9 +19,9 @@ export default defineConfig({
     }
   },
 
-  base: `/${repoName}/`,
+  base: '/listing/',
   build: {
     outDir: 'dist',
-    sourcemap: true 
+    sourcemap: true
   }
 })
