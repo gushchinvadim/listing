@@ -1,9 +1,8 @@
-# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [ main ] # Или 'master', проверьте название вашей ветки
   workflow_dispatch:
 
 permissions:
@@ -12,8 +11,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,25 +25,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'yarn'  # 👈 Используйте 'yarn', если у вас Yarn
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install
 
       - name: Build
-        run: yarn build  # 👈 Vite применит base из vite.config.js
+        run: yarn build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist  # 👈 Vite собирает в dist/
+          path: ./dist
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
