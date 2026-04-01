@@ -80,4 +80,9 @@ export default defineConfig([
   },
 ])
 ```
-# listing
+# start
+
+```yarn create vite you-app --template react-ts```
+
+
+
