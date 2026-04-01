@@ -10,7 +10,7 @@ function App() { // 👈 Убрали явный тип возврата
   useEffect((): void => {
     console.log('🔄 Начало загрузки...');
     
-    fetch('/data/etsy.json')
+    fetch(`${import.meta.env.BASE_URL}data/etsy.json`)
       .then((response) => {
         console.log('📡 Статус:', response.status);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
